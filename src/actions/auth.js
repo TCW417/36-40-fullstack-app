@@ -13,6 +13,11 @@ export const removeToken = () => ({
   type: 'TOKEN_REMOVE',
 });
 
+export const authError = token => ({
+  type: 'TOKEN_AUTH_ERROR',
+  payload: token,
+});
+
 // These are async action creators
 
 export const userSignup = user => (dispatch) => {
@@ -23,12 +28,11 @@ export const userSignup = user => (dispatch) => {
       password
     }
   */
+
   return superagent.post(`${API_URL}${routes.SIGNUP_ROUTE}`)
     .send(user)
     .withCredentials() // The .withCredentials() method enables the ability to send cookies from the origin
     .then((response) => {
-      console.log('.then block auth.js after superagent.post');
-      // return store.dispatch({ type: 'SET_TOKEN, payload: response.body.token })
       return dispatch(setToken(response.body.token));
     });
 };

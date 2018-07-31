@@ -8,34 +8,53 @@ import * as authActions from '../../actions/auth';
 import * as routes from '../../lib/routes';
 
 // This component will be connected to the store
-const mapStateToProps = state => ({
-  token: state.token,
-});
+const mapStateToProps = (state) => {
+  return { // eslint-disable-line
+    token: state.token.token,
+    signupError: state.token.signupError,
+    loginError: state.token.loginError,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   userSignup: user => dispatch(authActions.userSignup(user)),
   userLogin: user => dispatch(authActions.userLogin(user)),
+  authError: error => dispatch(authActions.authError(error)),
 });
 
-const Landing = (props) => {
-  const handleSignup = (user) => {
-    props.userSignup(user)
+class Landing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: props.token,
+      signupError: props.signupError,
+      loginError: props.loginError,
+    };
+  }
+
+  handleSignup = (user) => {
+    this.props.userSignup(user)
       .then(() => {
-        // this.props.history is NOT an array. These props are implicitly given to us by Redux's "connect" method when we connect this component to the store. The "push" method is a function that is used to save the history of where we travel in our app, i.e. if we went to "dasboard" or "/signup". Drill down into React dev tools until you see a component called "<Connect(Landing)> in the JSX and check out its props from there to see"
-        props.history.push(routes.DASHBOARD_ROUTE);
+        this.props.history.push(routes.DASHBOARD_ROUTE);
       })
-      .catch(console.error);
+      .catch(() => {
+        this.props.authError({ error: 'signupError' });
+        this.props.history.push(routes.SIGNUP_ROUTE);
+      });
   };
   
-  const handleLogin = (user) => {
-    props.userLogin(user)
+  handleLogin = (user) => {
+    this.props.userLogin(user)
       .then(() => {
-        props.history.push(routes.DASHBOARD_ROUTE);
+        this.props.history.push(routes.DASHBOARD_ROUTE);
       })
-      .catch(console.error);
+      .catch(() => {
+        this.props.authError({ error: 'loginError' });
+        this.props.history.push(routes.LOGIN_ROUTE);
+      });
   };
   
-  const renderJSX = (pathname) => {
+  renderJSX = (pathname) => {
     const rootJSX = // eslint-disable-line
     <div>
       <h2>Welcome</h2>
@@ -48,7 +67,7 @@ const Landing = (props) => {
     const signUpJSX = // eslint-disable-line
     <div>
       <h2>Sign Up</h2>
-      <AuthForm onComplete={ handleSignup }/>
+      <AuthForm key="signup" signupError={ this.props.signupError } onComplete={ this.handleSignup }/>
       <p>Already have an account?</p>
       <Link to="/login"> Login </Link>
     </div>;
@@ -56,7 +75,7 @@ const Landing = (props) => {
     const loginJSX = // eslint-disable-line
     <div>
       <h2> login </h2>
-      <AuthForm type="login" onComplete={ handleLogin } />
+      <AuthForm key="login" type="login" loginError={ this.props.loginError } onComplete={ this.handleLogin } />
       <p> Don&#39;t have an account? </p>
       <Link to="/signup"> signup </Link>
     </div>;
@@ -73,19 +92,26 @@ const Landing = (props) => {
     }
   };
 
-  const { location } = props;
-  return (
-    <div>
-      { renderJSX(location.pathname) }
-    </div>
-  );
-};
+  
+  render() {
+    const { location } = this.props;
+    return (
+      <div>
+        { this.renderJSX(location.pathname) }
+      </div>
+    );
+  }
+}
 
 Landing.propTypes = {
   userLogin: PropTypes.func,
   userSignup: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
+  token: PropTypes.string,
+  signupError: PropTypes.bool,
+  loginError: PropTypes.bool,
+  authError: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);

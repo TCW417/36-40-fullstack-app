@@ -5,7 +5,6 @@ import Landing from '../landing/landing';
 import Dashboard from '../dashboard/dashboard';
 import AuthRedirect from '../auth-redirect/auth-redirect';
 
-
 export default function App() {
   return (
     <div className="app">
@@ -21,3 +20,5 @@ export default function App() {
     </div>
   );
 }
+
+// export default connect(mapStateToProps, null)(App);

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import * as routes from '../../lib/routes';
 
 const mapStateToProps = state => ({
-  token: state.token,
+  token: state.token.token,
 });
 
 const AuthRedirect = (props) => {

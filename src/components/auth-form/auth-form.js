@@ -6,12 +6,12 @@ const emptyState = {
   username: '',
   email: '',
   password: '',
-  error: false,
 };
 
 export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = emptyState;
   }
 
@@ -41,29 +41,36 @@ export default class AuthForm extends React.Component {
   render() {
     let { type } = this.props;
     type = type === 'login' ? type : 'signup';
-    let formClass = 'auth-form';
-    if (this.state.error) formClass = 'auth-form error-state';
+    let errorMsg = null;
+    if (this.props.signupError || this.props.loginError) {
+      if (type === 'login') errorMsg = <p className="error-state">Invalid username and/or password.</p>;
+      if (type !== 'login') errorMsg = <p className="error-state">Duplicate or missing username and/or email.</p>;
+    }
+      
     return (
-      <form className={ formClass } onSubmit={ this.handleSubmit }>
-        <input 
-          name="username"
-          placeholder="username"
-          type="text"
-          value={ this.state.username }
-          onChange={ this.handleChange }
-        />
+      <div>
+        <form className="auth-form" onSubmit={ this.handleSubmit }>
+          <input 
+            name="username"
+            placeholder="username"
+            type="text"
+            value={ this.state.username }
+            onChange={ this.handleChange }
+          />
 
-        { this.renderEmailInput(type) }
+          { this.renderEmailInput(type) }
 
-        <input 
-          name="password"
-          placeholder="password"
-          type="password"
-          value={ this.state.password }
-          onChange={ this.handleChange }
-        />
-        <button type="submit">{ type }</button>
-      </form>
+          <input 
+            name="password"
+            placeholder="password"
+            type="password"
+            value={ this.state.password }
+            onChange={ this.handleChange }
+          />
+          <button type="submit">{ type }</button>
+          { errorMsg }
+        </form>
+      </div>
     );
   }
 }
@@ -71,4 +78,6 @@ export default class AuthForm extends React.Component {
 AuthForm.propTypes = {
   onComplete: PropTypes.func,
   type: PropTypes.string,
+  signupError: PropTypes.bool,
+  loginError: PropTypes.bool,
 };

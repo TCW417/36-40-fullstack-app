@@ -1,5 +1,8 @@
 import superagent from 'superagent';
 import * as routes from '../lib/routes';
+import { eraseCookie } from '../lib/cookieLib';
+
+const TOKEN_COOKIE_KEY = 'Lab37ServerToken';
 
 // These are sync action creators
 
@@ -13,6 +16,18 @@ export const removeToken = () => ({
   type: 'TOKEN_REMOVE',
 });
 
+export const logout = () => {
+  // 1. Delete the cookie from the browser
+  // 2. Dispatch the "TOKEN_REMOVE" action to the Redux store
+  eraseCookie(TOKEN_COOKIE_KEY);
+  return removeToken();
+};
+
+export const authError = token => ({
+  type: 'TOKEN_AUTH_ERROR',
+  payload: token,
+});
+
 // These are async action creators
 
 export const userSignup = user => (dispatch) => {
@@ -23,12 +38,11 @@ export const userSignup = user => (dispatch) => {
       password
     }
   */
+
   return superagent.post(`${API_URL}${routes.SIGNUP_ROUTE}`)
     .send(user)
     .withCredentials() // The .withCredentials() method enables the ability to send cookies from the origin
     .then((response) => {
-      console.log('.then block auth.js after superagent.post');
-      // return store.dispatch({ type: 'SET_TOKEN, payload: response.body.token })
       return dispatch(setToken(response.body.token));
     });
 };

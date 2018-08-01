@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+// import Navbar from '../navbar/navbar';
 import AuthForm from '../auth-form/auth-form';
 import * as authActions from '../../actions/auth';
 import * as routes from '../../lib/routes';
@@ -100,6 +101,7 @@ class Landing extends React.Component {
         { this.renderJSX(location.pathname) }
       </div>
     );
+    // return (<Navbar />);
   }
 }
 

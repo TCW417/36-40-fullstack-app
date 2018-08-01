@@ -1,5 +1,7 @@
+import { readCookie } from '../lib/cookieLib';
+
 const defaultState = {
-  token: '',
+  token: readCookie('Lab37ServerToken'), // will return null if no cookie
   signupError: false,
   loginError: false,
 };

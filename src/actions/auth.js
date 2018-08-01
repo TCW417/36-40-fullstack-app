@@ -1,5 +1,8 @@
 import superagent from 'superagent';
 import * as routes from '../lib/routes';
+import { eraseCookie } from '../lib/cookieLib';
+
+const TOKEN_COOKIE_KEY = 'Lab37ServerToken';
 
 // These are sync action creators
 
@@ -12,6 +15,13 @@ export const setToken = token => ({
 export const removeToken = () => ({
   type: 'TOKEN_REMOVE',
 });
+
+export const logout = () => {
+  // 1. Delete the cookie from the browser
+  // 2. Dispatch the "TOKEN_REMOVE" action to the Redux store
+  eraseCookie(TOKEN_COOKIE_KEY);
+  return removeToken();
+};
 
 export const authError = token => ({
   type: 'TOKEN_AUTH_ERROR',

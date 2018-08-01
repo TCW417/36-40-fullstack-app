@@ -51,9 +51,15 @@ export default class ProfileForm extends React.Component {
           onChange={ this.handleChange }
         />
         <label htmlFor="location">Your location</label>
-        <textarea 
+        <input 
           name="location"
           value={ this.state.location }
+          onChange={ this.handleChange }
+        />
+        <label htmlFor="profileImageUrl">Your Picture URL</label>
+        <input 
+          name="profileImageUrl"
+          value={ this.state.profileImageUrl }
           onChange={ this.handleChange }
         />
         <button type="submit">{ buttonText }</button>

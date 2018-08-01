@@ -30,10 +30,9 @@ class Profile extends React.Component {
   // lifecycle hook from React itself
   // TODO: resolve this flash of content
   componentDidMount() {
-    // debugger;
     this.props.fetchProfile()
       .then((response) => {
-        console.log('profile/profile.js componentDidMount response', response);
+        console.log('profile/profile.js componentDidMount fetchProfile response', response);
       })
       .catch(console.error);
   }
@@ -66,7 +65,8 @@ class Profile extends React.Component {
 
       JSXDisplay = // eslint-disable-line
       <div>
-        <h2>This is my bio</h2>
+        <h2>About { profile.firstName }</h2>
+        <img src={ profile.profileImageUrl } />
         <p>{ profile.bio }</p>
         <p>My location is { profile.location }</p>
         <button onClick={() => this.setState({ editing: true })}>Edit</button>

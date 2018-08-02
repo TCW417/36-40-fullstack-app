@@ -11,7 +11,7 @@ export default (state = defaultState, { type, payload }) => {
     case 'TOKEN_SET':
       return { ...defaultState, token: payload };
     case 'TOKEN_REMOVE':
-      return defaultState;
+      return { ...defaultState, token: null }; // force token to null for async reasons
     case 'TOKEN_AUTH_ERROR':
       return { ...defaultState, [payload.error]: true };
     default: 

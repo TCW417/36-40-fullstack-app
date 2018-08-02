@@ -21,6 +21,7 @@ webpackConfig.plugins = [
   }),
   new DefinePlugin({
     API_URL: JSON.stringify(process.env.API_URL),
+    GOOGLE_OAUTH_ID: JSON.stringify(process.env.GOOGLE_OAUTH_ID),
   }),
 ];
 

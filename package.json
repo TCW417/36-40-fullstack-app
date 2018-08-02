@@ -14,7 +14,9 @@
     "watch": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint --fix **/*.js",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "dbon": "mkdir -p ./db && mongod --dbpath ./db",
+    "dboff": "killall mongod"
   },
   "keywords": [],
   "author": "",
@@ -52,6 +54,7 @@
   },
   "dependencies": {
     "dotenv": "^6.0.0",
+    "file-loader": "^1.1.11",
     "prop-types": "^15.6.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

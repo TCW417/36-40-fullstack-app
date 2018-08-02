@@ -37,8 +37,8 @@ export const updateProfile = profile => (dispatch, getState) => {
 };
 
 export const fetchProfile = () => (dispatch, getState) => {
-  console.log('actions/profile.js fetchProfile store', getState());
   const { token } = getState().token;
+  console.log('actions/profile.js fetchProfile token', token);
 
   return superagent.get(`${API_URL}${routes.PROFILE_ROUTE}/me`)
     .set('Authorization', `Bearer ${token}`)

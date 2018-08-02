@@ -9,10 +9,9 @@ const createAttachment = file => ({
 
 // async action creator
 
-export default fileObj => (dispatch) => {
+const createAttachmentApiRequest = fileObj => (dispatch) => {
   const token = readCookie('Lab37ServerToken');
-  // need to get model and modelId based on where the attachment is supposed to be attached
-  console.log('attachment async action fileObj', fileObj);
+  
   return superagent.post(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
     .query({ [fileObj.model]: fileObj.modelId })
@@ -22,3 +21,16 @@ export default fileObj => (dispatch) => {
       return dispatch(createAttachment(response.body));
     });
 };
+
+const fetchAttachmentApiRequest = id => (dispatch) => {
+  const token = readCookie('Lab37ServerToken');
+  
+  return superagent.get(`${API_URL}/attachments`)
+    .set('Authorization', `Bearer ${token}`)
+    .query({ id })
+    .then((response) => {
+      return dispatch(createAttachment(response.body));
+    });
+};
+
+export { createAttachmentApiRequest, fetchAttachmentApiRequest };

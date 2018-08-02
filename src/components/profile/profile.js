@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import * as profileActions from '../../actions/profile';
+import createAttachmentApiRequest from '../../actions/attachment';
 import * as routes from '../../lib/routes';
 
 import ProfileForm from '../profile-form/profile-form';
+import AttachmentForm from '../attachment-form/attachment-form';
 
 const mapStateToProps = store => ({
   profile: store.profile,
@@ -15,6 +17,7 @@ const mapDispatchToProps = dispatch => ({
   createProfile: profile => dispatch(profileActions.createProfile(profile)),
   updateProfile: profile => dispatch(profileActions.updateProfile(profile)), 
   fetchProfile: profile => dispatch(profileActions.fetchProfile(profile)),
+  createAttachment: file => dispatch(createAttachmentApiRequest(file)),
 });
 
 class Profile extends React.Component {
@@ -76,6 +79,7 @@ class Profile extends React.Component {
       <div>
         <h2>{ `${profile.firstName} ${profile.lastName}` }</h2>
         { this.state.editing ? JSXEditing : JSXDisplay }
+        { this.state.editing ? '' : <AttachmentForm onComplete={ this.props.createAttachment } model="profile" modelId={this.props.profile._id} /> }
       </div>;
       
       return JSXProfile;
@@ -90,6 +94,7 @@ class Profile extends React.Component {
       <div className="profile">
         <h1>Profile</h1>
         { profile ? this.renderJSX(profile) : <ProfileForm onComplete={ this.handleCreate }/>}
+        {/* { profile ? <AttachmentForm onComplete={ this.props.createAttachment } model="profile" modelId={this.props.profile._id} /> : ''} */}
       </div>
     );
   }
@@ -100,6 +105,7 @@ Profile.propTypes = {
   createProfile: PropTypes.func,
   updateProfile: PropTypes.func,
   fetchProfile: PropTypes.func,
+  createAttachment: PropTypes.func,
   history: PropTypes.object,
 };
 

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as authActions from '../../actions/auth';
 import * as routes from '../../lib/routes';
 import googleLogin from '../../assets/google-btn-light.png';
+import './navbar.scss';
 
 const mapStateToProps = state => ({
   loggedIn: !!state.token.token, // double !! coerces it a boolean

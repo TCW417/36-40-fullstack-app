@@ -14,7 +14,9 @@
     "watch": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint --fix **/*.js",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "dbon": "mkdir -p ./db && mongod --dbpath ./db",
+    "dboff": "killall mongod"
   },
   "keywords": [],
   "author": "",

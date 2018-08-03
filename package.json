@@ -17,7 +17,8 @@
     "cypress:open": "cypress open",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
     "dboff": "killall mongod",
-    "start": "npm run build && node index.js"
+    "start": "npm run build && node index.js",
+    "heroku-prebuild": "npm uninstall cypress"
   },
   "keywords": [],
   "author": "",

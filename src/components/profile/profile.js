@@ -40,8 +40,6 @@ class Profile extends React.Component {
     this.props.fetchProfile()
       .then((response) => {
         // if response isn't empty, retrieve any attachments
-        console.log('profile.js compDidMount response from fetch', response);
-        // response.payload.attachments is the array of attachment IDs
         const promises = [];
         if (response) {
           for (let i = 0; i < response.payload.attachments.length; i++) {
@@ -103,7 +101,6 @@ class Profile extends React.Component {
 
   render() {
     const { profile } = this.props;
-    console.log('profile/profile.js render props', this.props);
     return (
       <div className="profile">
         <h1>Profile</h1>

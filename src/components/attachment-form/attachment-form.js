@@ -39,7 +39,8 @@ export default class AttachmentForm extends React.Component {
       file: '',
       fileType: '',
       dragOverClass: '',
-      title: '',
+      filename: '',
+      desc: '',
       model: props.model,
       modelId: props.modelId,
     };
@@ -107,14 +108,15 @@ export default class AttachmentForm extends React.Component {
           this.setState({
             fileType: file.type,
             dragOverClass: '',
-            title: file.name,
+            filename: file.name,
+            desc: this.state.desc,
             file,
             preview,
           });
         })
         .catch(console.error);
     } else {
-      this.setState({ title: value });
+      this.setState({ desc: value });
     }
   }
 
@@ -155,10 +157,11 @@ export default class AttachmentForm extends React.Component {
           />
           <button onClick={ this.clearFile }>Clear File</button>
         </div>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="desc">Description (optional)</label>
         <input 
             type="text"
-            name="title"
+            name="desc"
+            placeholder="Attachment description"
             onChange={ this.handleChange }
           />
         <button type="submit">Upload a File!</button>

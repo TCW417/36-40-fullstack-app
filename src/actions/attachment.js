@@ -29,6 +29,7 @@ const fetchAttachmentApiRequest = id => (dispatch) => {
   
   return superagent.get(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
+    .withCredentials()
     .query({ id })
     .then((response) => {
       return dispatch(createAttachment(response.body));

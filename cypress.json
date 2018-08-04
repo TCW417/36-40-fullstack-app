@@ -29,7 +29,7 @@
   "videoCompression": 32,
   "videoUploadOnPasses": true,
   "videosFolder": "cypress/videos",
-  "viewportHeight": 660,
+  "viewportHeight": 900,
   "viewportWidth": 1000,
   "waitForAnimations": true,
   "watchForFileChanges": true

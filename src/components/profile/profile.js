@@ -83,7 +83,7 @@ class Profile extends React.Component {
         <img src={ profile.profileImageUrl } />
         <p>{ profile.bio }</p>
         <p>My location is { profile.location }</p>
-        <button onClick={() => this.setState({ editing: true })}>Edit</button>
+        <button data-cy="edit-profile" onClick={() => this.setState({ editing: true })}>Edit</button>
       </div>;
 
       JSXProfile = // eslint-disable-line

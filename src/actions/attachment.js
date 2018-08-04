@@ -14,6 +14,7 @@ const createAttachmentApiRequest = fileObj => (dispatch) => {
   
   return superagent.post(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
+    .withCredentials()
     .query({ [fileObj.model]: fileObj.modelId.trim(), desc: fileObj.desc })
     .field('desc', fileObj.desc)
     .field('filename', fileObj.filename)

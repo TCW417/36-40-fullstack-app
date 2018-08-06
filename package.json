@@ -15,6 +15,7 @@
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint --fix **/*.js",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
     "dboff": "killall mongod",
     "start": "npm run build && node index.js",
@@ -64,6 +65,8 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
-    "superagent": "^3.8.3"
+    "superagent": "^3.8.3",
+    "url-loader": "^1.0.1",
+    "validator": "^10.5.0"
   }
 }

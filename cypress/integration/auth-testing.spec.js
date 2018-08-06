@@ -1,5 +1,5 @@
 const isStubbed = true;
-
+//   "baseUrl": "http://localhost:8080",
 const backEndApiUrl = 'http://localhost:3000/api'
 
 describe('SIGNUP testing', function() {

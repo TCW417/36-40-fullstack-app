@@ -34,41 +34,27 @@ class Landing extends React.Component {
   }
 
   handleSignup = (user) => {
-    this.props.userSignup(user)
+    console.log('landing handleSignup user', user);
+    return this.props.userSignup(user)
       .then(() => {
         this.props.history.push(routes.DASHBOARD_ROUTE);
-      })
-      .catch(() => {
-        this.props.authError({ error: 'signupError' });
-        this.props.history.push(routes.SIGNUP_ROUTE);
       });
   };
   
   handleLogin = (user) => {
-    this.props.userLogin(user)
+    return this.props.userLogin(user)
       .then(() => {
         this.props.history.push(routes.DASHBOARD_ROUTE);
-      })
-      .catch(() => {
-        this.props.authError({ error: 'loginError' });
-        this.props.history.push(routes.LOGIN_ROUTE);
       });
   };
   
   renderJSX = (pathname) => {
-    // const rootJSX = // eslint-disable-line
-    // <div>
-    //   <h2>Welcome</h2>
-    //   <ul>
-    //     <li><Link to="/signup">Sign Up</Link></li>
-    //     <li><Link to="/login">Login</Link></li>
-    //   </ul>
-    // </div>;
 
     const signUpJSX = // eslint-disable-line
     <div>
       <h2>Sign Up</h2>
-      <AuthForm key="signup" signupError={ this.props.signupError } onComplete={ this.handleSignup }/>
+      <h4>Username and password must be at least 5 characters long.</h4>
+      <AuthForm key="signup" type="signup" signupError={ this.props.signupError } onComplete={ this.handleSignup }/>
       <p>Already have an account?</p>
       <Link to="/login"> Login </Link>
     </div>;
@@ -82,8 +68,6 @@ class Landing extends React.Component {
     </div>;
 
     switch (pathname) {
-      // case routes.ROOT_ROUTE:
-      //   return rootJSX;
       case routes.SIGNUP_ROUTE:
         return signUpJSX;
       case routes.LOGIN_ROUTE:
@@ -101,7 +85,6 @@ class Landing extends React.Component {
         { this.renderJSX(location.pathname) }
       </div>
     );
-    // return (<Navbar />);
   }
 }
 

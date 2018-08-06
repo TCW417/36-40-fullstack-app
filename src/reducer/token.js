@@ -2,8 +2,6 @@ import { readCookie } from '../lib/cookieLib';
 
 const defaultState = {
   token: readCookie('Lab37ServerToken'), // will return null if no cookie
-  signupError: false,
-  loginError: false,
 };
 
 export default (state = defaultState, { type, payload }) => {
@@ -12,8 +10,6 @@ export default (state = defaultState, { type, payload }) => {
       return { ...defaultState, token: payload };
     case 'TOKEN_REMOVE':
       return { ...defaultState, token: null }; // force token to null for async reasons
-    case 'TOKEN_AUTH_ERROR':
-      return { ...defaultState, [payload.error]: true };
     default: 
       return state;
   }

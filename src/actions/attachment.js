@@ -12,7 +12,7 @@ const createAttachment = file => ({
 const createAttachmentApiRequest = fileObj => (dispatch) => {
   const token = readCookie('Lab37ServerToken');
   const thisQuery = {};
-  thisQuery[fileObj.model] = fileObj.modelId;
+  thisQuery[fileObj.model] = fileObj.modelId.trim();
   if (fileObj.desc !== '') thisQuery.desc = fileObj.desc;
   return superagent.post(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)

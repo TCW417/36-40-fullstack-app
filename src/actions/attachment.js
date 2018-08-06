@@ -16,6 +16,7 @@ const createAttachmentApiRequest = fileObj => (dispatch) => {
   if (fileObj.desc !== '') thisQuery.desc = fileObj.desc;
   return superagent.post(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
+    .set('Access-Control-Allow-Origin', 'http://mygarage-frontend.herokuapp.com')
     // .withCredentials()
     .query(thisQuery)
     .field('filename', fileObj.filename)

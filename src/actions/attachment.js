@@ -17,7 +17,7 @@ const createAttachmentApiRequest = fileObj => (dispatch) => {
   return superagent.post(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
     .set('Access-Control-Allow-Origin', 'http://mygarage-frontend.herokuapp.com')
-    // .withCredentials()
+    .withCredentials()
     .query(thisQuery)
     .field('filename', fileObj.filename)
     .attach('attachment', fileObj.file)
@@ -31,7 +31,7 @@ const fetchAttachmentApiRequest = id => (dispatch) => {
   
   return superagent.get(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
-    // .withCredentials()
+    .withCredentials()
     .query({ id })
     .then((response) => {
       return dispatch(createAttachment(response.body));

@@ -68,7 +68,7 @@ export default class AuthForm extends React.Component {
       ...this.state, 
       [name]: value, 
       [`${name}Valid`]: valid, 
-      [`${name}Error`]: error, 
+      [`${name}Error`]: this.props.type !== 'login' ? error : '', 
     });
   } 
 

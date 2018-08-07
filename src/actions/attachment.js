@@ -19,8 +19,8 @@ const createAttachmentApiRequest = fileObj => (dispatch) => {
     // .set('Access-Control-Allow-Origin', 'http://mygarage-frontend.herokuapp.com')
     // .withCredentials()
     .query(thisQuery)
-    .field('filename', fileObj.filename)
-    .attach('attachment', fileObj.file)
+    .field('title', fileObj.filename)
+    .attach('image', fileObj.file)
     .then((response) => {
       return dispatch(createAttachment(response.body));
     });

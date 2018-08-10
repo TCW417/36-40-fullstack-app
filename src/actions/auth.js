@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import * as routes from '../lib/routes';
 import { eraseCookie } from '../lib/cookieLib';
 
-const TOKEN_COOKIE_KEY = 'Lab37ServerToken';
+const TOKEN_COOKIE_KEY = 'RaToken';
 
 // These are sync action creators
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
 
 import './auth-form.scss';
 
@@ -44,7 +44,7 @@ export default class AuthForm extends React.Component {
         }
         break;
       case 'email':
-        if (!validator.isEmail(value)) {
+        if (!isEmail(value)) {
           error = <span className="error icon-cross"></span>;
           valid = false;
         } else {
@@ -68,7 +68,7 @@ export default class AuthForm extends React.Component {
       ...this.state, 
       [name]: value, 
       [`${name}Valid`]: valid, 
-      [`${name}Error`]: this.props.type !== 'login' ? error : '', 
+      [`${name}Error`]: error, 
     });
   } 
 
@@ -125,7 +125,7 @@ export default class AuthForm extends React.Component {
             value={ this.state.username }
             onChange={ this.handleChange }
           />
-          <span className={this.state.usernameValid ? 'valid' : 'error' }>{ this.state.usernameError }</span>
+          <span className={this.state.usernameValid ? 'valid' : 'error' }>{ type === 'signup' ? this.state.usernameError : '' }</span>
 
           { this.renderEmailInput(type) }
 
@@ -136,7 +136,7 @@ export default class AuthForm extends React.Component {
             value={ this.state.password }
             onChange={ this.handleChange }
           />
-          <span className={this.state.passwordValid ? 'valid' : 'error' }>{ this.state.passwordError }</span>
+          <span className={this.state.passwordValid ? 'valid' : 'error' }>{ type === 'signup' ? this.state.passwordError : '' }</span>
           <div className="error">
           { this.state.submitError }
           </div>

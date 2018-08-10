@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const emptyState = {
-  bio: '',
+  email: '',
   firstName: '',
   lastName: '',
-  location: '',
+  role: '',
 };
 
 export default class ProfileForm extends React.Component {
@@ -44,22 +44,16 @@ export default class ProfileForm extends React.Component {
           value={ this.state.lastName }
           onChange={ this.handleChange }
         />
-        <label htmlFor="bio">Type your bio here</label>
-        <textarea 
-          name="bio"
-          value={ this.state.bio }
+        <label htmlFor="email">Your email</label>
+        <input 
+          name="email"
+          value={ this.state.email }
           onChange={ this.handleChange }
         />
-        <label htmlFor="location">Your location</label>
+        <label htmlFor="role">Your role</label>
         <input 
-          name="location"
-          value={ this.state.location }
-          onChange={ this.handleChange }
-        />
-        <label htmlFor="profileImageUrl">Your Picture URL</label>
-        <input 
-          name="profileImageUrl"
-          value={ this.state.profileImageUrl }
+          name="role"
+          value={ this.state.role }
           onChange={ this.handleChange }
         />
         <button type="submit">{ buttonText }</button>

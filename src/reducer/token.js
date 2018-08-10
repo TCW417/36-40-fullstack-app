@@ -1,7 +1,7 @@
 import { readCookie } from '../lib/cookieLib';
 
 const defaultState = {
-  token: readCookie('Lab37ServerToken'), // will return null if no cookie
+  token: readCookie('RaToken'), // will return null if no cookie
 };
 
 export default (state = defaultState, { type, payload }) => {

@@ -10,13 +10,13 @@ const createAttachment = file => ({
 // async action creator
 
 const createAttachmentApiRequest = fileObj => (dispatch) => {
-  const token = readCookie('Lab37ServerToken');
+  const token = readCookie('RaToken');
   const thisQuery = {};
   thisQuery[fileObj.model] = fileObj.modelId.trim();
   if (fileObj.desc !== '') thisQuery.desc = fileObj.desc;
   return superagent.post(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)
-    .set('Access-Control-Allow-Origin', 'http://mygarage-frontend.herokuapp.com')
+    // .set('Access-Control-Allow-Origin', 'http://mygarage-frontend.herokuapp.com')
     // .withCredentials()
     .query(thisQuery)
     .field('filename', fileObj.filename)
@@ -27,7 +27,7 @@ const createAttachmentApiRequest = fileObj => (dispatch) => {
 };
 
 const fetchAttachmentApiRequest = id => (dispatch) => {
-  const token = readCookie('Lab37ServerToken');
+  const token = readCookie('RaToken');
   
   return superagent.get(`${API_URL}/attachments`)
     .set('Authorization', `Bearer ${token}`)

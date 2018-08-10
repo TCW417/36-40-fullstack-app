@@ -81,8 +81,8 @@ class Profile extends React.Component {
       <div>
         <h2>About { profile.firstName }</h2>
         <img src={ profile.profileImageUrl } />
-        <p>{ profile.bio }</p>
-        <p>My location is { profile.location }</p>
+        <p>{ profile.email }</p>
+        <p>My RA Role is { profile.role }</p>
         <button data-cy="edit-profile" onClick={() => this.setState({ editing: true })}>Edit</button>
       </div>;
 

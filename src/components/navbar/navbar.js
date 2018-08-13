@@ -54,7 +54,7 @@ class Navbar extends React.Component {
     const { loggedIn, doLogout } = this.props;
     return (
       <header className="header">
-        <h1>myGarage</h1>
+        <h1>RA Mentor Portal Testing</h1>
         <nav>
           {this.renderJSX(loggedIn)}
         </nav>

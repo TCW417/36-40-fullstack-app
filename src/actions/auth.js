@@ -3,7 +3,7 @@ import * as routes from '../lib/routes';
 import { eraseCookie } from '../lib/cookieLib';
 
 const TOKEN_COOKIE_KEY = 'RaToken';
-
+const USER_INFO_KEY = 'RaUser';
 // These are sync action creators
 
 export const setToken = token => ({
@@ -20,6 +20,7 @@ export const logout = () => {
   // 1. Delete the cookie from the browser
   // 2. Dispatch the "TOKEN_REMOVE" action to the Redux store
   eraseCookie(TOKEN_COOKIE_KEY);
+  eraseCookie(USER_INFO_KEY);
   return removeToken();
 };
 

@@ -23,13 +23,13 @@ class Navbar extends React.Component {
     const baseUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
     const redirect = `redirect_uri=${API_URL}/oauth/google`;
     // scope = resources your app can access on a user's behalf
-    const scope = 'scope=openid%20email%20profile';
+    const scope = 'scope=openid%20email%20profile%20https://www.googleapis.com/auth/drive';
     const clientId = `client_id=${GOOGLE_OAUTH_ID.trim()}`;
     // prompt determines if we ask the user for consent first to sign in via Google
     const prompt = 'prompt=consent%20select_account';
     const responseType = 'response_type=code';
     console.log('oauthURL:', `${baseUrl}?${redirect}&${scope}&${clientId}&${prompt}&${responseType}`);
-    return `${baseUrl}?${redirect}&${scope}&${clientId}&${prompt}&${responseType}`;
+    return `${baseUrl}?${redirect}&${scope}&${clientId}&${prompt}&${responseType}&access_type=offline`;
   }
 
   renderJSX = (loggedIn) => {
